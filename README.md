@@ -55,7 +55,7 @@ Underneath the setup chunk, replace the text with the following header and text.
 
 ```## Introduction```
 
-`This R Markdown document demonstrates my abilities to use models for data analysis. `
+`This R Markdown document demonstrates my abilities to use models for data analysis using a data set collected on crickets.`
 
 Save the file, write a commit message and ***commit***.
 
@@ -72,6 +72,20 @@ names(crickets)
 ```
 
 Save the file, write a commit message and ***commit***.
+
+### What effects chirp rate?
+
+Let's create a header `## Whats that sound?`  and under this header we will write the text.
+`In this report we examine what factors predict a crickets chrip rate.`
+
+Next we will add a chunk named summary that summarizes the data in the data set. Among the crickets in our data set we can examine the data at glance using the `summary()` function. 
+```
+{r summary, include = FALSE}
+summary(crickets)
+```
+
+
+
 
 
 
