@@ -19,12 +19,11 @@ data(crickets, package = "modeldata")
 names(crickets)
 ```
 
-## Including Plots
+## Whats that sound?
 
-You can also embed plots, for example:
+In this report we examine what factors predict a crickets chirp rate.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r summary, echo= FALSE}
+summary(crickets)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
