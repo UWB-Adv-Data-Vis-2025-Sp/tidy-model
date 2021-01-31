@@ -429,7 +429,45 @@ summary {
 </div>
 <div id="instructions" class="section level2">
 <h2>Instructions</h2>
-<p>For this assignment, we will begin by creating a new R Markdown document. Select <strong>New File</strong> and <strong>R Markdown</strong>. Give the document the title “tidy-model” and add your name as the author. Save the new file as <code>tidy-model.Rmd</code>.</p>
+<p>Make sure to write out the code to get in the habit of understanding the grammar of the code. Do not copy directly. The power of learning code is the creative avenues it unlocks. If you need help, remember there are lots of resources including:</p>
+<ul>
+<li>Discord</li>
+<li>Canvas Community Q&amp;A</li>
+<li>The internet</li>
+<li>Prof. Trujillo</li>
+</ul>
+</div>
+<div id="creating-a-rmd-file" class="section level2">
+<h2>Creating a Rmd file</h2>
+<p>For this assignment, we will begin by creating a new R Markdown document. Select <strong>New File</strong> and <strong>R Markdown…</strong> and then give the document the title “tidy-model” and add your name as the author. Save the new <code>.Rmd</code> file as <code>tidy-model.Rmd</code>.</p>
+<p>Open the file and then use the <strong>Knit</strong> button to load the file as an html document.</p>
+<p>At this point, save the file, write a commit message and <strong><em>commit</em></strong>.</p>
+<div id="setup-chunk" class="section level3">
+<h3>Setup chunk</h3>
+<p>We will update the library. Update the <em>setup</em> chunk to load packages as shown below.</p>
+<pre><code>{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(&#39;tidyverse&#39;)</code></pre>
+<p>You may not have these packages installed, so you will want to use the following code in the console to get the packages needed for this assignment.</p>
+<pre><code>install.packages(c(&#39;tidyverse&#39;))</code></pre>
+<p>Save the file, write a commit message and <strong><em>commit</em></strong>.</p>
+</div>
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>Underneath the setup chunk, replace the text with the following header and text.</p>
+<p><code>## Introduction</code></p>
+<p><code>This R Markdown document demonstrates my abilities to use models for data analysis.</code></p>
+<p>Save the file, write a commit message and <strong><em>commit</em></strong>.</p>
+</div>
+<div id="load-data-chunk" class="section level3">
+<h3>Load data chunk</h3>
+<p>Create a new chunk under your replaced text called <code>{r load data, include = FALSE}</code></p>
+<p>Inside this chunk, load the data collected on different species of crickets</p>
+<pre><code>{r load data, include = FALSE}
+data(crickets, package = &quot;modeldata&quot;)
+names(crickets)</code></pre>
+<p>Save the file, write a commit message and <strong><em>commit</em></strong>.</p>
+</div>
 </div>
 </div>
 
