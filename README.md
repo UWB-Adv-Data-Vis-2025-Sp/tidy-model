@@ -75,14 +75,31 @@ Save the file, write a commit message and ***commit***.
 
 ### What effects chirp rate?
 
+Remove the remaining text, header and code created by the template so we can code our own information.
+
 Let's create a header `## Whats that sound?`  and under this header we will write the text.
 `In this report we examine what factors predict a crickets chrip rate.`
 
 Next we will add a chunk named summary that summarizes the data in the data set. Among the crickets in our data set we can examine the data at glance using the `summary()` function. 
 ```
-{r summary, include = FALSE}
+{r summary, echo = FALSE}
 summary(crickets)
 ```
+Save the file, knit, write a commit message, and ***commit***.
+
+Next, write in text to descriptive the general statistics including the number of observations in the data set, the number of species, the temperature range (minimum and maximum), and the mean rate of chriping.
+
+Add to the chunk to make a histogram of chirp rate based using ggplot. 
+```
+{r summary, echo = FALSE}
+summary(crickets)
+ggplot(crickets, aes(x = rate)) +
+  geom_histogram(bins = 8) + 
+  ggtitle("Distribution of the chirp rate of crickets") +
+  xlab('Chirp rate (per min.)')
+```
+Save the file, knit, write a commit message, and ***commit***.
+
 
 
 
