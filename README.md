@@ -205,7 +205,7 @@ Create a new header `## Interactions`, new chunk called `species histogram`, mod
 ```
 {r species historgram, echo = FALSE}
 ggplot(crickets, aes(x = rate, fill = species)) +
-  geom_histogram(bins = 8) + 
+  geom_histogram(position = 'identity', alpha = 0.7, bins = 8) + 
   ggtitle("Distribution of the chirp rate of crickets") +
   xlab('Chirp rate (per min.)')
 ```
