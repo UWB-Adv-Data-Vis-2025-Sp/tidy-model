@@ -75,6 +75,8 @@ Save the file, write a commit message and ***commit***.
 
 ### What factors effects chirp rate?
 
+#### Graphing chirps
+
 Remove the remaining text, header and code created by the template so we can code our own information.
 
 Let's create a header `## What is that sound?`  and under this header we will write the text.
@@ -101,6 +103,8 @@ ggplot(crickets, aes(x = rate)) +
 ```
 Save the file, knit, write a commit message, and ***commit***.
 
+#### Graphing temperature and chirps
+
 Let's create a new header `## Temperature affects chirp rate`
 
 Next we will add a chunk named *temp* that will plot a scatter plot of temperature and chirp rate.
@@ -118,16 +122,18 @@ After making a graph, add some text below such as `Based on a scatter plot of te
 
 Save the file, knit, write a commit message, and ***commit***.
 
+#### Modeling temperature and chirps
+
 In the `temp` chunk, create a new line below the ggplot commands to add a linear model using the functions `lm()` and `summary.lm()`. Notice that this line uses the formula format to calculate the model. 
 
-Instead of ggplot's aesthetics function  `aes(x = temp, y = rate)`,  we can represent our variables as a formula `rate ~ temp` which states that the linear formula will try to predict chirp rate (the y-value) based on a linear relationship with temperature (the x-value). Typically the assumption of these models is `y ~ x` and you enter this with the argument for formula followed by data.  
+Instead of ggplot's aesthetics function  `aes(x = temp, y = rate)`,  we can represent our variables as a formula `rate ~ temp` which states that the linear formula will try to predict chirp rate (the y-value) based on a linear relationship with temperature (the x-value). Typically the assumption of these models is that the dependent variable comes before your list of independent variables, `y ~ x`. Often the syntax will ask for a formula before you enter  the argument for data.  
 
 Store the output of the `lm()` function as a new object `temp_lm`. And then call up the `summary.lm()` for a complete output of the linear model.
 
 Update the chunk so it looks like the one below. 
 ```
 {r temp, echo= FALSE}
-ggplot(crickets, rate ~ temp)) +
+ggplot(crickets, aes(x = temp, y = rate)) +
   geom_point() + 
   geom_smooth(method = 'lm') +
   ggtitle("Plot of temperature and chirp rate") +
@@ -136,7 +142,7 @@ ggplot(crickets, rate ~ temp)) +
 
 temp_lm <- lm(rate ~ temp, crickets)
 
-summary.lm(rate ~ temp, crickets)
+summary.lm(temp_lm)
 ```
 
 Notice that you get a two values important from the linear model. The first is the intercept, the point at which the line of best fit would intersect the y-axis. Additionally we see a second value that represents the slope of the curve or the rate of the relationship. In this case we can see that has temperature raises 1 degree C, the crickets will chirp an additional 4 chirps per minute. 
@@ -145,6 +151,22 @@ In addition to the linear model giving us a sense of the relationship, we can al
 
 For now, let's revise our earlier sentence in the text to add more information.  `Based on a scatter plot of temperature and chirping and a correlation test, it seems that as temperature increases one degree, the rate of chirping increases about 4 chirps per minute.`
 
-
 Save the file, knit, write a commit message, and ***commit***.
+
+#### Temperture across species.
+
+Next we can see if an account of the different species of crickets have an effect on our model. Up to this point, we have grouped all crickets together and that may be an inappropriate assumption. Many animals use signals like chirping to communicate and, for mating behaviors, it's important to distinguish your call from other similar species. Now lets make a new header and chunk for graphing and separating these two values. 
+
+`## Species-specific effects of temperature on chirping`
+
+```
+{r species, echo= FALSE}
+ggplot(crickets, aes(x = temp, y = rate, color = species)) +
+  geom_point() + 
+  geom_smooth(method = 'lm') +
+  ggtitle("Plot of temperature and chirp rate for two species of crickets") +
+  ylab('Chirp rate (per min.)') +
+  xlab('Temperature (Celsius)')
+```
+
 
