@@ -149,11 +149,11 @@ Notice that you get a two values important from the linear model. The first is t
 
 In addition to the linear model giving us a sense of the relationship, we can also see the residual values (the distance between each point and the curve), the standard error of the measures, and even calculated probability values (p-values) for hypothesis testing. In fact this summary gives us great information if we are interested in t-values, R squared values, or F-statistics!
 
-For now, let's revise our earlier sentence in the text to add more information.  `Based on a scatter plot of temperature and chirping and a correlation test, it seems that as temperature increases one degree, the rate of chirping increases about 4 chirps per minute.`
+For now, let's revise our earlier sentence in the text to add more information.  `Based on a scatter plot of temperature and chirping and a correlation test, it seems that as temperature increases one degree, the rate of chirping increases about 4.2 chirps per minute.`
 
 Save the file, knit, write a commit message, and ***commit***.
 
-#### Temperture across species.
+#### Temperture across species
 
 Next we can see if an account of the different species of crickets have an effect on our model. Up to this point, we have grouped all crickets together and that may be an inappropriate assumption. Many animals use signals like chirping to communicate and, for mating behaviors, it's important to distinguish your call from other similar species. Now lets make a new header and chunk for graphing and separating these two values. 
 
@@ -169,4 +169,31 @@ ggplot(crickets, aes(x = temp, y = rate, color = species)) +
   xlab('Temperature (Celsius)')
 ```
 
+Wow! Looks like instead of one line of best fit, now we have two! The plot has added color to separate the data by species. Now we can clearly see that both crickets have a positive relationship between temperature and chirping, but start at different places. So lets return to our linear model to see how values have changed. Add the `lm()` and `summary.lm()` functions to the chunk. This time we will extend our formula to account for the new variable. 
+
+```
+{r species, echo= FALSE}
+ggplot(crickets, aes(x = temp, y = rate, color = species)) +
+  geom_point() + 
+  geom_smooth(method = 'lm') +
+  ggtitle("Plot of temperature and chirp rate for two species of crickets") +
+  ylab('Chirp rate (per min.)') +
+  xlab('Temperature (Celsius)')
+  
+  
+species_lm <- lm(rate ~ temp + species, crickets)
+
+summary.lm(species_lm)
+```
+
+Let's check out the data of this model to see how it stacks up against the first model. Now we have three important values in the coefficients table. It helps us to think about the impact of the different variables on the line. The intercept again states where the line would cross the y-axis. The value gives us the temperature relationship to chirping like before. Notice that this has dropped to 3.6 as the slope so as temperature rises one degree (C) then the chirps increase 3.6 chirps per minute. Finally there is a third variable showing up as -10. This value represents the difference between species. Since we have only two species, we can treat this as the difference in the intercept between the two values. So the cricket species *O. exclamationis* has a chirp rate that is 10 chirps per minute higher than its counter part *O. niveus*. So we have a linear model that predicts the relationship between temperature, species and chirps. 
+
+We can use any of the statistical methods collected from summary.lm() to compare the quality of the species-specific model to the general model we made earlier. For instance, let's compare the R squared values which is a measure of the amount of variance explained by the model. In the temp_lm model, the R-Squared value was 0.9199, which means about 92 percent of the variance in the data is explained by the model, where as in the species_lm model, the R-Squared value was 0.9896, which means about 99 percent of the variance in the data is explained by this model. Even though the first model might be good enough, the second one is much more reliable for making predictions. 
+ 
+Add text to explain in your own words what the second graph and model show. 
+
+Save the file, knit, write a commit message, and ***commit***.
+
+
+#### Interactions between temperture and species
 
