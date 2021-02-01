@@ -470,6 +470,8 @@ names(crickets)</code></pre>
 </div>
 <div id="what-factors-effects-chirp-rate" class="section level3">
 <h3>What factors effects chirp rate?</h3>
+<div id="graphing-chirps" class="section level4">
+<h4>Graphing chirps</h4>
 <p>Remove the remaining text, header and code created by the template so we can code our own information.</p>
 <p>Let’s create a header <code>## What is that sound?</code> and under this header we will write the text. <code>In this report we examine what factors predict a crickets chrip rate.</code></p>
 <p>Next we will add a chunk named <em>summary</em> that summarizes the data in the data set. Among the crickets in our data set we can examine the data at glance using the <code>summary()</code> function.</p>
@@ -485,6 +487,9 @@ ggplot(crickets, aes(x = rate)) +
   ggtitle(&quot;Distribution of the chirp rate of crickets&quot;) +
   xlab(&#39;Chirp rate (per min.)&#39;)</code></pre>
 <p>Save the file, knit, write a commit message, and <strong><em>commit</em></strong>.</p>
+</div>
+<div id="graphing-temperature-and-chirps" class="section level4">
+<h4>Graphing temperature and chirps</h4>
 <p>Let’s create a new header <code>## Temperature affects chirp rate</code></p>
 <p>Next we will add a chunk named <em>temp</em> that will plot a scatter plot of temperature and chirp rate.</p>
 <pre><code>{r temp, echo= FALSE}
@@ -496,21 +501,99 @@ ggplot(crickets, aes(x = temp, y = rate)) +
   xlab(&#39;Temperature (Celsius)&#39;)</code></pre>
 <p>After making a graph, add some text below such as <code>Based on a scatter plot of temperature and chirping, it seems that as temperature increases, the rate of chirping also increases.</code></p>
 <p>Save the file, knit, write a commit message, and <strong><em>commit</em></strong>.</p>
-<p>In the <code>temp</code> chunk, create a new line below the ggplot commands to add a linear model and add a correlation test using the functions <code>lm()</code> and <code>cor.test()</code>. Notice that this test uses the formula format to calculate correlation coefficients.</p>
-<p>Instead of ggplot’s aesthetics function <code>aes(x = temp, y = rate)</code>, we can represent our variables as a formula <code>rate ~ temp</code> which states that the linear formula will try to predict chirp rate (the y-value) based on a linear relationship with temperature (the x-value). Typically the assumption of these models is <code>y ~ x</code> and you enter this with the argument for formula followed by data.</p>
+</div>
+<div id="modeling-temperature-and-chirps" class="section level4">
+<h4>Modeling temperature and chirps</h4>
+<p>In the <code>temp</code> chunk, create a new line below the ggplot commands to add a linear model using the functions <code>lm()</code> and <code>summary.lm()</code>. Notice that this line uses the formula format to calculate the model.</p>
+<p>Instead of ggplot’s aesthetics function <code>aes(x = temp, y = rate)</code>, we can represent our variables as a formula <code>rate ~ temp</code> which states that the linear formula will try to predict chirp rate (the y-value) based on a linear relationship with temperature (the x-value). Typically the assumption of these models is that the dependent variable comes before your list of independent variables, <code>y ~ x</code>. Often the syntax will ask for a formula before you enter the argument for data.</p>
+<p>Store the output of the <code>lm()</code> function as a new object <code>temp_lm</code>. And then call up the <code>summary.lm()</code> for a complete output of the linear model.</p>
+<p>Update the chunk so it looks like the one below.</p>
 <pre><code>{r temp, echo= FALSE}
-ggplot(crickets, rate ~ temp)) +
+ggplot(crickets, aes(x = temp, y = rate)) +
   geom_point() + 
   geom_smooth(method = &#39;lm&#39;) +
   ggtitle(&quot;Plot of temperature and chirp rate&quot;) +
   ylab(&#39;Chirp rate (per min.)&#39;) +
   xlab(&#39;Temperature (Celsius)&#39;)
 
-lm(rate ~ temp, crickets)
+temp_lm &lt;- lm(rate ~ temp, crickets)
 
-cor.test(rate ~ temp, crickets)
-</code></pre>
+summary.lm(temp_lm)</code></pre>
+<p>Notice that you get a two values important from the linear model. The first is the intercept, the point at which the line of best fit would intersect the y-axis. Additionally we see a second value that represents the slope of the curve or the rate of the relationship. In this case we can see that has temperature raises 1 degree C, the crickets will chirp an additional 4 chirps per minute.</p>
+<p>In addition to the linear model giving us a sense of the relationship, we can also see the residual values (the distance between each point and the curve), the standard error of the measures, and even calculated probability values (p-values) for hypothesis testing. In fact this summary gives us great information if we are interested in t-values, R squared values, or F-statistics!</p>
+<p>For now, let’s revise our earlier sentence in the text to add more information. <code>Based on a scatter plot of temperature and chirping and a correlation test, it seems that as temperature increases one degree, the rate of chirping increases about 4.2 chirps per minute.</code></p>
+<p>Save the file, knit, write a commit message, and <strong><em>commit</em></strong>.</p>
 </div>
+<div id="temperture-across-species" class="section level4">
+<h4>Temperture across species</h4>
+<p>Next we can see if an account of the different species of crickets have an effect on our model. Up to this point, we have grouped all crickets together and that may be an inappropriate assumption. Many animals use signals like chirping to communicate and, for mating behaviors, it’s important to distinguish your call from other similar species. Now lets make a new header and chunk for graphing and separating these two values.</p>
+<p><code>## Species-specific effects of temperature on chirping</code></p>
+<pre><code>{r species, echo= FALSE}
+ggplot(crickets, aes(x = temp, y = rate, color = species)) +
+  geom_point() + 
+  geom_smooth(method = &#39;lm&#39;) +
+  ggtitle(&quot;Plot of temperature and chirp rate for two species of crickets&quot;) +
+  ylab(&#39;Chirp rate (per min.)&#39;) +
+  xlab(&#39;Temperature (Celsius)&#39;)</code></pre>
+<p>Wow! Looks like instead of one line of best fit, now we have two! The plot has added color to separate the data by species. Now we can clearly see that both crickets have a positive relationship between temperature and chirping, but start at different places. So lets return to our linear model to see how values have changed. Add the <code>lm()</code> and <code>summary.lm()</code> functions to the chunk. This time we will extend our formula to account for the new variable.</p>
+<pre><code>{r species, echo= FALSE}
+ggplot(crickets, aes(x = temp, y = rate, color = species)) +
+  geom_point() + 
+  geom_smooth(method = &#39;lm&#39;) +
+  ggtitle(&quot;Plot of temperature and chirp rate for two species of crickets&quot;) +
+  ylab(&#39;Chirp rate (per min.)&#39;) +
+  xlab(&#39;Temperature (Celsius)&#39;)
+  
+  
+species_lm &lt;- lm(rate ~ temp + species, crickets)
+
+summary.lm(species_lm)</code></pre>
+<p>Let’s check out the data of this model to see how it stacks up against the first model. Now we have three important values in the coefficients table. It helps us to think about the impact of the different variables on the line. The intercept again states where the line would cross the y-axis. The value gives us the temperature relationship to chirping like before. Notice that this has dropped to 3.6 as the slope so as temperature rises one degree (C) then the chirps increase 3.6 chirps per minute. Finally there is a third variable showing up as -10. This value represents the difference between species. Since we have only two species, we can treat this as the difference in the intercept between the two values. So the cricket species <em>O. exclamationis</em> has a chirp rate that is 10 chirps per minute higher than its counter part <em>O. niveus</em>. So we have a linear model that predicts the relationship between temperature, species and chirps.</p>
+<p>We can use any of the statistical methods collected from summary.lm() to compare the quality of the species-specific model to the general model we made earlier. For instance, let’s compare the R squared values which is a measure of the amount of variance explained by the model. In the temp_lm model, the R-Squared value was 0.9199, which means about 92 percent of the variance in the data is explained by the model, where as in the species_lm model, the R-Squared value was 0.9896, which means about 99 percent of the variance in the data is explained by this model. Even though the first model might be good enough, the second one is much more reliable for making predictions.</p>
+<p>Add text to explain in your own words what the second graph and model show.</p>
+<p>Save the file, knit, write a commit message, and <strong><em>commit</em></strong>.</p>
+</div>
+<div id="interactions-between-temperture-and-species" class="section level4">
+<h4>Interactions between temperture and species</h4>
+<p>In addition to seeing the variables as contributing to the slope or intercept, we can also test for interactions. Perhaps we think that the effects of species and temperature might be interlinked because one species tends to live in a colder temperature than another species.</p>
+<p>For instance, let’s examine the original histogram we made with a new sensitivity to the species varaible.</p>
+<p>Create a new header <code>## Interactions</code>, new chunk called <code>species histogram</code>, modify the code from the <code>summary</code> chunk to add fill as a variable for species. This new graph should show that the species occupy different temperature zones, which we may want to account for in the model. Add text below that states that these species occupy different temperature ranges.</p>
+<pre><code>{r species historgram, echo = FALSE}
+ggplot(crickets, aes(x = rate, fill = species)) +
+  geom_histogram(bins = 8) + 
+  ggtitle(&quot;Distribution of the chirp rate of crickets&quot;) +
+  xlab(&#39;Chirp rate (per min.)&#39;)</code></pre>
+<p>This time we will use our code from the <code>species</code> chunk to make a new chunk <code>interactions</code>, but will updated it to include an addition to the formula so it accounts for interactions <code>rate ~ temp + species + temp:species</code>. Alternatively you could represent interactions with <code>rate ~ (temp + species)^2</code>. We will store the new model as an object <code>species_x_temp_lm</code> and to compare this with our previous model we will add an additional code of an ANOVA (Analysis of Variance) to compare the two linear models. This comparison produces a p value far above 0.05 and suggests that the interaction model and the species model are not significantly different. Therefore we can rely on the simpler <code>species_lm</code> results.</p>
+<pre><code>{r interactions, echo= FALSE}
+ggplot(crickets, aes(x = temp, y = rate, color = species)) +
+  geom_point() + 
+  geom_smooth(method = &#39;lm&#39;) +
+  ggtitle(&quot;Plot of temperature and chirp rate for two species of crickets&quot;) +
+  ylab(&#39;Chirp rate (per min.)&#39;) +
+  xlab(&#39;Temperature (Celsius)&#39;)
+  
+species_x_temp_lm &lt;- lm(rate ~ temp + species + temp:species, crickets) 
+summary.lm(species_x_temp_lm)
+
+anova(species_lm, species_x_temp_lm)</code></pre>
+<p>Add text that states that you checked for interactions but decided to stay with the species model.</p>
+<p>Save the file, knit, write a commit message, and <strong><em>commit</em></strong>.</p>
+</div>
+</div>
+</div>
+<div id="going-deeper" class="section level2">
+<h2>Going deeper</h2>
+<p>Congratulations! You wrote your first (in this class) code for performing a linear regression analysis on data. These methods can be easily adapted for modeling nearly any data set. The basic ideas and formulas used here can be adopted to run logistic regression models, multiple linear models, hierarchical models, and many other approaches.</p>
+<p>Consider additional resources to deepen your knowledge for your particular area of interest.</p>
+<ul>
+<li><a href="https://www.tmwr.org/software-modeling.html"><em>Tidy Modeling with R</em></a> by Max Kuhn and Julia Silge.</li>
+<li><a href="https://r4ds.had.co.nz"><em>R for Data Science</em></a> by Hadley and Grolemund:
+<ul>
+<li><a href="https://r4ds.had.co.nz/model-intro.html">Introduction</a></li>
+<li><a href="https://r4ds.had.co.nz/model-basics.html">Model basics</a></li>
+<li><a href="https://r4ds.had.co.nz/model-building.html">Model building</a></li>
+</ul></li>
+</ul>
 </div>
 </div>
 

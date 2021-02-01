@@ -194,6 +194,51 @@ Add text to explain in your own words what the second graph and model show.
 
 Save the file, knit, write a commit message, and ***commit***.
 
-
 #### Interactions between temperture and species
 
+In addition to seeing the variables as contributing to the slope or intercept, we can also test for interactions. Perhaps we think that the effects of species and temperature might be interlinked because one species tends to live in a colder temperature than another species. 
+
+For instance, let's examine the original histogram we made with a new sensitivity to the species varaible. 
+
+Create a new header `## Interactions`, new chunk called `species histogram`, modify the code from the `summary` chunk to add fill as a variable for species. This new graph should show that the species occupy different temperature zones, which we may want to account for in the model. Add text below that states that these species occupy different temperature ranges.
+
+```
+{r species historgram, echo = FALSE}
+ggplot(crickets, aes(x = rate, fill = species)) +
+  geom_histogram(bins = 8) + 
+  ggtitle("Distribution of the chirp rate of crickets") +
+  xlab('Chirp rate (per min.)')
+```
+
+This time we will use our code from the `species` chunk to make a new chunk `interactions`, but will updated it to include an addition to the formula so it accounts for interactions `rate ~ temp + species + temp:species`. Alternatively you could represent interactions with `rate ~ (temp + species)^2`. We will store the new model as an object `species_x_temp_lm` and to compare this with our previous model we will add an additional code of an ANOVA (Analysis of Variance) to compare the two linear models. This comparison produces a p value far above 0.05 and suggests that the interaction model and the species model are not significantly different. Therefore we can rely on the simpler `species_lm` results. 
+
+```
+{r interactions, echo= FALSE}
+ggplot(crickets, aes(x = temp, y = rate, color = species)) +
+  geom_point() + 
+  geom_smooth(method = 'lm') +
+  ggtitle("Plot of temperature and chirp rate for two species of crickets") +
+  ylab('Chirp rate (per min.)') +
+  xlab('Temperature (Celsius)')
+  
+species_x_temp_lm <- lm(rate ~ temp + species + temp:species, crickets) 
+summary.lm(species_x_temp_lm)
+
+anova(species_lm, species_x_temp_lm)
+```
+
+Add text that states that you checked for interactions but decided to stay with the species model. 
+
+Save the file, knit, write a commit message, and ***commit***.
+
+## Going deeper
+
+Congratulations! You wrote your first (in this class) code for performing a linear regression analysis on data. These methods can be easily adapted for modeling nearly any data set. The basic ideas and formulas used here can be adopted to run logistic regression models, multiple linear models, hierarchical models, and many other approaches.
+
+Consider additional resources to deepen your knowledge for your particular area of interest. 
+
+* [*Tidy Modeling with R*](https://www.tmwr.org/software-modeling.html) by Max Kuhn and Julia Silge.
+* [*R for Data Science*](https://r4ds.had.co.nz) by Hadley and Grolemund:
+  + [Introduction](https://r4ds.had.co.nz/model-intro.html)
+  + [Model basics](https://r4ds.had.co.nz/model-basics.html) 
+  + [Model building](https://r4ds.had.co.nz/model-building.html)
