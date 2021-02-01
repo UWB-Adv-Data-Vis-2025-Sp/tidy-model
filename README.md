@@ -8,7 +8,7 @@ For this assignment we will learn how to represent data with a statistical model
 Familiarize yourself with linear regression. 
 
 If you aren't familiar with linear models or need  a refresher about linear models and how to interpret them, start here by watching these two YouTube videos:
-* [Linear Regression: Vary Basics](https://www.youtube.com/watch?v=ZkjP5RJLQF4)
+* [Linear Regression: Very Basics](https://www.youtube.com/watch?v=ZkjP5RJLQF4)
 * [Linear Regression, Algebra, Equations, and Patterns](https://www.youtube.com/watch?v=iAgYLRy7e20&list=PLIeGtxpvyG-LoKUpV0fSY8BGKIMIdmfCi&index=2). 
 
 Additionally, you may want to read about [Software for modeling in *Tidy Modeling with R*](https://www.tmwr.org/software-modeling.html) by Max Kuhn and Julia Silge.
