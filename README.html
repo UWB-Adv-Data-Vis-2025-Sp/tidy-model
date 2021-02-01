@@ -485,7 +485,7 @@ ggplot(crickets, aes(x = rate)) +
   ggtitle(&quot;Distribution of the chirp rate of crickets&quot;) +
   xlab(&#39;Chirp rate (per min.)&#39;)</code></pre>
 <p>Save the file, knit, write a commit message, and <strong><em>commit</em></strong>.</p>
-<p>Let’s create a header <code>## Temperature affects chirp rate</code></p>
+<p>Let’s create a new header <code>## Temperature affects chirp rate</code></p>
 <p>Next we will add a chunk named <em>temp</em> that will plot a scatter plot of temperature and chirp rate.</p>
 <pre><code>{r temp, echo= FALSE}
 ggplot(crickets, aes(x = temp, y = rate)) +
@@ -496,6 +496,20 @@ ggplot(crickets, aes(x = temp, y = rate)) +
   xlab(&#39;Temperature (Celsius)&#39;)</code></pre>
 <p>After making a graph, add some text below such as <code>Based on a scatter plot of temperature and chirping, it seems that as temperature increases, the rate of chirping also increases.</code></p>
 <p>Save the file, knit, write a commit message, and <strong><em>commit</em></strong>.</p>
+<p>In the <code>temp</code> chunk, create a new line below the ggplot commands to add a linear model and add a correlation test using the functions <code>lm()</code> and <code>cor.test()</code>. Notice that this test uses the formula format to calculate correlation coefficients.</p>
+<p>Instead of ggplot’s aesthetics function <code>aes(x = temp, y = rate)</code>, we can represent our variables as a formula <code>rate ~ temp</code> which states that the linear formula will try to predict chirp rate (the y-value) based on a linear relationship with temperature (the x-value). Typically the assumption of these models is <code>y ~ x</code> and you enter this with the argument for formula followed by data.</p>
+<pre><code>{r temp, echo= FALSE}
+ggplot(crickets, rate ~ temp)) +
+  geom_point() + 
+  geom_smooth(method = &#39;lm&#39;) +
+  ggtitle(&quot;Plot of temperature and chirp rate&quot;) +
+  ylab(&#39;Chirp rate (per min.)&#39;) +
+  xlab(&#39;Temperature (Celsius)&#39;)
+
+lm(rate ~ temp, crickets)
+
+cor.test(rate ~ temp, crickets)
+</code></pre>
 </div>
 </div>
 </div>

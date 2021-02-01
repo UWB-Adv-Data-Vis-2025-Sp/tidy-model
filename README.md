@@ -118,8 +118,13 @@ After making a graph, add some text below such as `Based on a scatter plot of te
 
 Save the file, knit, write a commit message, and ***commit***.
 
-Next we are going to remake this graph with short hand formula popularized by tidyverse. Replace `aes(x = temp, y = rate)` with a formula `rate ~ temp` which states that the linear formula is predicts chirp rate (the y-value) based on a linear relationship with temperature (the x-value).
+In the `temp` chunk, create a new line below the ggplot commands to add a linear model using the functions `lm()` and `summary.lm()`. Notice that this line uses the formula format to calculate the model. 
 
+Instead of ggplot's aesthetics function  `aes(x = temp, y = rate)`,  we can represent our variables as a formula `rate ~ temp` which states that the linear formula will try to predict chirp rate (the y-value) based on a linear relationship with temperature (the x-value). Typically the assumption of these models is `y ~ x` and you enter this with the argument for formula followed by data.  
+
+Store the output of the `lm()` function as a new object `temp_lm`. And then call up the `summary.lm()` for a complete output of the linear model.
+
+Update the chunk so it looks like the one below. 
 ```
 {r temp, echo= FALSE}
 ggplot(crickets, rate ~ temp)) +
@@ -128,6 +133,18 @@ ggplot(crickets, rate ~ temp)) +
   ggtitle("Plot of temperature and chirp rate") +
   ylab('Chirp rate (per min.)') +
   xlab('Temperature (Celsius)')
+
+temp_lm <- lm(rate ~ temp, crickets)
+
+summary.lm(rate ~ temp, crickets)
 ```
 
+Notice that you get a two values important from the linear model. The first is the intercept, the point at which the line of best fit would intersect the y-axis. Additionally we see a second value that represents the slope of the curve or the rate of the relationship. In this case we can see that has temperature raises 1 degree C, the crickets will chirp an additional 4 chirps per minute. 
+
+In addition to the linear model giving us a sense of the relationship, we can also see the residual values (the distance between each point and the curve), the standard error of the measures, and even calculated probability values (p-values) for hypothesis testing. In fact this summary gives us great information if we are interested in t-values, R squared values, or F-statistics!
+
+For now, let's revise our earlier sentence in the text to add more information.  `Based on a scatter plot of temperature and chirping and a correlation test, it seems that as temperature increases one degree, the rate of chirping increases about 4 chirps per minute.`
+
+
+Save the file, knit, write a commit message, and ***commit***.
 
