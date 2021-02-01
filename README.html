@@ -468,11 +468,11 @@ data(crickets, package = &quot;modeldata&quot;)
 names(crickets)</code></pre>
 <p>Save the file, write a commit message and <strong><em>commit</em></strong>.</p>
 </div>
-<div id="what-effects-chirp-rate" class="section level3">
-<h3>What effects chirp rate?</h3>
+<div id="what-factors-effects-chirp-rate" class="section level3">
+<h3>What factors effects chirp rate?</h3>
 <p>Remove the remaining text, header and code created by the template so we can code our own information.</p>
-<p>Let’s create a header <code>## Whats that sound?</code> and under this header we will write the text. <code>In this report we examine what factors predict a crickets chrip rate.</code></p>
-<p>Next we will add a chunk named summary that summarizes the data in the data set. Among the crickets in our data set we can examine the data at glance using the <code>summary()</code> function.</p>
+<p>Let’s create a header <code>## What is that sound?</code> and under this header we will write the text. <code>In this report we examine what factors predict a crickets chrip rate.</code></p>
+<p>Next we will add a chunk named <em>summary</em> that summarizes the data in the data set. Among the crickets in our data set we can examine the data at glance using the <code>summary()</code> function.</p>
 <pre><code>{r summary, echo = FALSE}
 summary(crickets)</code></pre>
 <p>Save the file, knit, write a commit message, and <strong><em>commit</em></strong>.</p>
@@ -484,6 +484,17 @@ ggplot(crickets, aes(x = rate)) +
   geom_histogram(bins = 8) + 
   ggtitle(&quot;Distribution of the chirp rate of crickets&quot;) +
   xlab(&#39;Chirp rate (per min.)&#39;)</code></pre>
+<p>Save the file, knit, write a commit message, and <strong><em>commit</em></strong>.</p>
+<p>Let’s create a header <code>## Temperature affects chirp rate</code></p>
+<p>Next we will add a chunk named <em>temp</em> that will plot a scatter plot of temperature and chirp rate.</p>
+<pre><code>{r temp, echo= FALSE}
+ggplot(crickets, aes(x = temp, y = rate)) +
+  geom_point() + 
+  geom_smooth(method = &#39;lm&#39;) +
+  ggtitle(&quot;Plot of temperature and chirp rate&quot;) +
+  ylab(&#39;Chirp rate (per min.)&#39;) +
+  xlab(&#39;Temperature (Celsius)&#39;)</code></pre>
+<p>After making a graph, add some text below such as <code>Based on a scatter plot of temperature and chirping, it seems that as temperature increases, the rate of chirping also increases.</code></p>
 <p>Save the file, knit, write a commit message, and <strong><em>commit</em></strong>.</p>
 </div>
 </div>

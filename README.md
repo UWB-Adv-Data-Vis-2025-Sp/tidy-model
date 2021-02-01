@@ -73,14 +73,14 @@ names(crickets)
 
 Save the file, write a commit message and ***commit***.
 
-### What effects chirp rate?
+### What factors effects chirp rate?
 
 Remove the remaining text, header and code created by the template so we can code our own information.
 
-Let's create a header `## Whats that sound?`  and under this header we will write the text.
+Let's create a header `## What is that sound?`  and under this header we will write the text.
 `In this report we examine what factors predict a crickets chrip rate.`
 
-Next we will add a chunk named summary that summarizes the data in the data set. Among the crickets in our data set we can examine the data at glance using the `summary()` function. 
+Next we will add a chunk named *summary* that summarizes the data in the data set. Among the crickets in our data set we can examine the data at glance using the `summary()` function. 
 ```
 {r summary, echo = FALSE}
 summary(crickets)
@@ -89,7 +89,8 @@ Save the file, knit, write a commit message, and ***commit***.
 
 Next, write in text to descriptive the general statistics including the number of observations in the data set, the number of species, the temperature range (minimum and maximum), and the mean rate of chriping.
 
-Add to the chunk to make a histogram of chirp rate based using ggplot. 
+Add to the chunk to make a histogram of chirp rate based using ggplot.
+
 ```
 {r summary, echo = FALSE}
 summary(crickets)
@@ -100,9 +101,33 @@ ggplot(crickets, aes(x = rate)) +
 ```
 Save the file, knit, write a commit message, and ***commit***.
 
+Let's create a new header `## Temperature affects chirp rate`
 
+Next we will add a chunk named *temp* that will plot a scatter plot of temperature and chirp rate.
 
+```
+{r temp, echo= FALSE}
+ggplot(crickets, aes(x = temp, y = rate)) +
+  geom_point() + 
+  geom_smooth(method = 'lm') +
+  ggtitle("Plot of temperature and chirp rate") +
+  ylab('Chirp rate (per min.)') +
+  xlab('Temperature (Celsius)')
+```
+After making a graph, add some text below such as `Based on a scatter plot of temperature and chirping, it seems that as temperature increases, the rate of chirping also increases.`
 
+Save the file, knit, write a commit message, and ***commit***.
 
+Next we are going to remake this graph with short hand formula popularized by tidyverse. Replace `aes(x = temp, y = rate)` with a formula `rate ~ temp` which states that the linear formula is predicts chirp rate (the y-value) based on a linear relationship with temperature (the x-value).
+
+```
+{r temp, echo= FALSE}
+ggplot(crickets, rate ~ temp)) +
+  geom_point() + 
+  geom_smooth(method = 'lm') +
+  ggtitle("Plot of temperature and chirp rate") +
+  ylab('Chirp rate (per min.)') +
+  xlab('Temperature (Celsius)')
+```
 
 

@@ -19,7 +19,7 @@ data(crickets, package = "modeldata")
 names(crickets)
 ```
 
-## Whats that sound?
+## What is that sound?
 
 In this report we examine what factors predict a cricket's chirp rate. Our data contains 31 observations of crickets including two species. Data reports temperature from 17 to 30 degrees C. The mean chirp rate is 73 chirps per minute.
 
@@ -30,4 +30,16 @@ ggplot(crickets, aes(x = rate)) +
   ggtitle("Distribution of the chirp rate of crickets") +
   xlab('Chirp rate (per min.)')
 ```
+
+## Temperature affects chirp rate
+
+```{r temp, echo= FALSE}
+ggplot(crickets, aes(x = temp, y = rate)) +
+  geom_point() + 
+  geom_smooth(method = 'lm') +
+  ggtitle("Plot of temperature and chirp rate") +
+  ylab('Chirp rate (per min.)') +
+  xlab('Temperature (Celsius)')
+```
+Based on a scatter plot of temperature and chirping, it seems that as temperature increases, the rate of chirping also increases.
 
