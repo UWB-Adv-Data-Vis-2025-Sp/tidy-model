@@ -39,14 +39,16 @@ At this point, save the file, write a commit message and ***commit***.
 
 ### Setup chunk
 
-We will update the library. Update the *setup* chunk to load packages as shown below.
+We will update the library. Update the *setup* chunk to load packages as shown below. Here we use `include=FALSE` so that the chunk is not included in the final knit document. 
+
 ````
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library('tidyverse') ; library('modeldata')
 ``` 
 ````
-You may not have these packages installed, so you will want to use the following code in the console to get the packages needed for this assignment. 
+
+You may not have these packages installed, so you will want to use the following code in the **console** to get the packages needed for this assignment. 
 
 `install.packages(c('tidyverse', 'modeldata'))`
 
@@ -93,11 +95,12 @@ Next we will add a chunk named *summary* that summarizes the data in the data se
 summary(crickets)
 ``` 
 ````
+
 Save the file, knit, write a commit message, and ***commit***.
 
 Next, write in text to describe the general statistics by reporting the number of observations in the data set, the number of species, the temperature range (minimum and maximum), and the mean rate of chirping.
 
-Add to the chunk to make a histogram of chirp rate based using ggplot.
+Add to the chunk `summary` to make a histogram of chirp rate based using ggplot.
 
 ````
 ```{r summary, echo = FALSE}
@@ -108,7 +111,10 @@ ggplot(crickets, aes(x = rate)) +
   xlab('Chirp rate (per min.)')
 ```
 ````
+
 Save the file, knit, write a commit message, and ***commit***.
+
+If you get an error related to the duplicate label 'summary', it is because the summary chunk should be only one chunk that w we wrote the above code in. 
 
 #### Graphing temperature and chirps
 
@@ -126,6 +132,7 @@ ggplot(crickets, aes(x = temp, y = rate)) +
   xlab('Temperature (Celsius)')
 ```
 ````
+
 After making a graph, add some text below such as `Based on a scatter plot of temperature and chirping, it seems that as temperature increases, the rate of chirping also increases.`
 
 Save the file, knit, write a commit message, and ***commit***.
@@ -138,7 +145,8 @@ Instead of ggplot's aesthetics function  `aes(x = temp, y = rate)`,  we can repr
 
 Store the output of the `lm()` function as a new object `temp_lm`. And then call up the `summary.lm()` for a complete output of the linear model.
 
-Update the chunk so it looks like the one below. 
+Update the chunk so it looks like the one below.
+
 ````
 ```{r temp, echo= FALSE}
 ggplot(crickets, aes(x = temp, y = rate)) +
@@ -158,9 +166,13 @@ Notice that you get two values important from the linear model. The first is the
 
 In addition to the linear model giving us a sense of the relationship, we can also see the residual values (the distance between each point and the curve), the standard error of the measures, and even calculated probability values (p-values) for hypothesis testing. In fact this summary gives us great information if we are interested in t-values, R squared values, or F-statistics!
 
-For now, let's revise our earlier sentence in the text to add more information such as the following text.  `Based on a scatter plot of temperature and chirping and a correlation test, it seems that as temperature increases one degree, the rate of chirping increases about 4.2 chirps per minute.`
+For now, let's revise our earlier sentence in the text to add more information such as the following text:  
+
+`Based on a scatter plot of temperature and chirping and a correlation test, it seems that as temperature increases one degree, the rate of chirping increases about 4.2 chirps per minute.`
 
 Save the file, knit, write a commit message, and ***commit***.
+
+Again, if you get an error related to the duplicate label 'temp', it is because the summary chunk should be only one chunk that w we wrote the above code in.
 
 #### Temperture across species
 
@@ -176,7 +188,7 @@ ggplot(crickets, aes(x = temp, y = rate, color = species)) +
   ggtitle("Plot of temperature and chirp rate for two species of crickets") +
   ylab('Chirp rate (per min.)') +
   xlab('Temperature (Celsius)')
-  ```
+```
 ````
 
 Wow! It looks like instead of one line of best fit, now we have two! The plot has added colors to separate the data by species. Now we can clearly see that both crickets have a positive relationship between temperature and chirping, but start at different places. So let's return to our linear model to see how values have changed. Add the `lm()` and `summary.lm()` functions to the chunk. This time we will extend our formula to account for the new variable. 
