@@ -41,9 +41,9 @@ At this point, save the file, write a commit message and ***commit***.
 
 We will update the library. Update the *setup* chunk to load packages as shown below.
 
-` ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library('tidyverse') ; library('modeldata')``` `
+` ```{r setup, include=FALSE}`
+`knitr::opts_chunk$set(echo = TRUE)`
+`library('tidyverse') ; library('modeldata')``` `
 
 You may not have these packages installed, so you will want to use the following code in the console to get the packages needed for this assignment. 
 
