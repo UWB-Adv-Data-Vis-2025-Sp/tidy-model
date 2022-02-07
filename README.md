@@ -1,5 +1,4 @@
 # tidy-model
-Template file for homework assignment to learn to use R syntax for creating models in tidyverse.
 
 For this assignment we will learn how to represent data with a statistical model and take advantage of some of the tools in the tidyverse and base R that will make working with data easier. 
 
@@ -22,12 +21,7 @@ The sections on modeling form [*R for Data Science*](https://r4ds.had.co.nz) by 
 
 ## Instructions
 
-Make sure to write out the code to get in the habit of understanding the grammar of the code. Do not copy directly. The power of learning code is the creative avenues it unlocks. If you need help, remember there are lots of resources including:
-
-- Discord
-- Canvas Community Q&A
-- The internet
-- Prof. Trujillo
+Make sure to write out the code to get in the habit of understanding the grammar of the code. Do not copy directly. The power of learning code is the creative avenues it unlocks. If you need help, remember there are lots of resources.
 
 ## Creating an Rmd file
 
