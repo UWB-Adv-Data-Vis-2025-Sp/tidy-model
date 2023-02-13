@@ -4,6 +4,8 @@ For this assignment we will learn how to represent data with a statistical model
 
 ## Learning objectives 
 
+In this assignment you will demonstrate your ability to:
+
 * Be capable of running, modifying, and sharing scripts to accomplish analyze data and visualize in at a scripting language (R)
 * Manage project development to store, organize, and track code using digital collaboration tools for reproducibility (GitHub)
 * Build a quantitative linear model to accompany a data visualization for statistical analysis
