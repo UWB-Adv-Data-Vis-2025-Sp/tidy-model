@@ -2,6 +2,12 @@
 
 For this assignment we will learn how to represent data with a statistical model and take advantage of some of the tools in the tidyverse and base R that will make working with data easier. 
 
+## Learning objectives 
+
+* Be capable of running, modifying, and sharing scripts to accomplish analyze data and visualize in at a scripting language (R)
+* Manage project development to store, organize, and track code using digital collaboration tools for reproducibility (GitHub)
+* Build a quantitative linear model to accompany a data visualization for statistical analysis
+
 ## Before you get started
 
 Familiarize yourself with linear regression. 
