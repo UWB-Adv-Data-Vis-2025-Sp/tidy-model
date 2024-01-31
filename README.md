@@ -258,6 +258,16 @@ Add text that states that you checked for interactions but decided to stay with 
 
 Save the file, knit, write a commit message, and ***commit***.
 
+### Visualize and model diamonds prices
+
+Now try to build a linear model of at least 3 variables to predict the worth of a diamond without detailed instruction.
+
+You can find the data in the diamonds object:
+
+```load(ggplot2::diamonds)```
+
+Write commits, knit, and push all your work when you finish.
+
 ## Going deeper
 
 Congratulations! You wrote your first code for performing a linear regression analysis on data. These methods can be easily adapted for modeling nearly any data set. The basic ideas and formulas used here can be adopted to run logistic regression models, multiple linear models, hierarchical models, and many other approaches.
