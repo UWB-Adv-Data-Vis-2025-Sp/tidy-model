@@ -1,12 +1,13 @@
 # tidy-model
+Assignment by Caleb Trujillo
 
-For this assignment we will learn how to represent data with a statistical model and take advantage of some of the tools in the tidyverse and base R that will make working with data easier. 
+For this assignment, we will learn how to represent data with a statistical model and take advantage of some of the tools in the tidyverse and base R that will make working with data easier. 
 
 ## Learning objectives 
 
-In this assignment you will demonstrate your ability to:
+In this assignment, you will demonstrate your ability to:
 
-* Be capable of running, modifying, and sharing scripts to accomplish analyze data and visualize in at a scripting language (R)
+* Be capable of running, modifying, and sharing scripts to accomplish analyze data and visualize in a scripting language (R)
 * Manage project development to store, organize, and track code using digital collaboration tools for reproducibility (GitHub)
 * Build a quantitative linear model to accompany a data visualization for statistical analysis
 
@@ -29,19 +30,19 @@ The sections on modeling form [*R for Data Science*](https://r4ds.had.co.nz) by 
 
 ## Instructions
 
-Make sure to write out the code to get in the habit of understanding the grammar of the code. Do not copy directly. The power of learning code is the creative avenues it unlocks. If you need help, remember there are lots of resources.
+Write out the code to get in the habit of understanding its grammar. Do not copy directly. The power of learning code is the creative avenues it unlocks. If you need help, remember there are lots of resources.
 
 ## Creating an Rmd file
 
-For this assignment, we will begin by creating a new R Markdown document. Select **New File** and **R Markdown...** and then give the document the title "tidy-model" and add your name as the author. Save the new `.Rmd` file as `tidy-model.Rmd`.
+We will begin this assignment by creating a new R Markdown document. Select **New File** and **R Markdown...**, give the document the title "tidy-model" and add your name as the author. Save the new `.Rmd` file as `tidy-model.Rmd`.
 
 Open the file and then use the **Knit** button to load the file as an html document.
 
-At this point, save the file, write a commit message and ***commit***.
+At this point, save the file, write a commit message, and ***commit***.
 
 ### Setup chunk
 
-We will update the library. Update the *setup* chunk to load packages as shown below. Here we use `include=FALSE` so that the chunk is not included in the final knit document. 
+We will update the library. Update the *setup* chunk to load packages as shown below. Here, we use `include=FALSE`, so the chunk is not included in the final knit document. 
 
 ````
 ```{r setup, include=FALSE}
@@ -54,7 +55,7 @@ You may not have these packages installed, so you will want to use the following
 
 `install.packages(c('tidyverse', 'modeldata'))`
 
-Save the file, write a commit message and ***commit***.
+Save the file, write a commit message, and ***commit***.
 
 ### Introduction
 
@@ -64,7 +65,7 @@ Underneath the setup chunk, replace the text with the following header and text.
 
 `This R Markdown document demonstrates my abilities to use models for data analysis using a data set collected on crickets.`
 
-Save the file, write a commit message and ***commit***.
+Save the file, write a commit message, and ***commit***.
 
 ### Load data chunk
 
@@ -79,18 +80,18 @@ names(crickets)
 ```
 ````
 
-Save the file, write a commit message and ***commit***.
+Save the file, write a commit message, and ***commit***.
 
-### What factors affect chirp rate?
+### What factors affect the chirp rate?
 
 #### Graphing chirps
 
-Remove the remaining text, header and code created by the template so we can code our own information.
+Remove the remaining text, header, and code created by the template so we can code our information.
 
-Let's create a header `## What is that sound?`  and under this header we will write the text:
-`In this report we examine what factors predict a cricket's chrip rate.`
+Let's create a header `## What is that sound?`  and under this header, we will write the text:
+`In this report, we examine what factors predict a cricket's chirp rate.`
 
-Next we will add a chunk named *summary* that summarizes the data in the data set. Among the crickets in our data set we can examine the data at a glance using the `summary()` function. 
+Next, we will add a chunk named *summary* that summarizes the data in the data set. Using the `summary ()` function, we can examine the data at a glance. 
 
 ````
 ```{r summary, echo = FALSE}
@@ -100,9 +101,9 @@ summary(crickets)
 
 Save the file, knit, write a commit message, and ***commit***.
 
-Next, write in text to describe the general statistics by reporting the number of observations in the data set, the number of species, the temperature range (minimum and maximum), and the mean rate of chirping.
+Next, write in the text to describe the general statistics by reporting the number of observations in the data set, the number of species, the temperature range (minimum and maximum), and the mean rate of chirping.
 
-Add to the chunk `summary` to make a histogram of chirp rate based using ggplot.
+Add to the chunk `summary` to make a histogram of the chirp rate based on ggplot.
 
 ````
 ```{r summary, echo = FALSE}
@@ -116,13 +117,13 @@ ggplot(crickets, aes(x = rate)) +
 
 Save the file, knit, write a commit message, and ***commit***.
 
-If you get an error related to the duplicate label 'summary', it is because the summary chunk should be only one chunk that w we wrote the above code in. 
+If you get an error related to the duplicate label 'summary', it is because the summary chunk should be the only chunk that we wrote the above code in. 
 
 #### Graphing temperature and chirps
 
-Let's create a new header `## Temperature affects chirp rate`
+Let's create a new header, `## Temperature affects chirp rate`.
 
-Next we will add a chunk named *temp* that will plot a scatter plot of temperature and chirp rate.
+Next, we will add a chunk named *temp* that plots a scatter plot of temperature and chirp rate.
 
 ````
 ```{r temp, echo= FALSE}
@@ -143,9 +144,9 @@ Save the file, knit, write a commit message, and ***commit***.
 
 In the `temp` chunk, create a new line below the ggplot commands to add a linear model using the functions `lm()` and `summary.lm()`. Notice that this line uses the formula format to calculate the model. 
 
-Instead of ggplot's aesthetics function  `aes(x = temp, y = rate)`,  we can represent our variables as a formula `rate ~ temp` which states that the linear formula will try to predict chirp rate (the y-value) based on a linear relationship with temperature (the x-value). Typically the assumption of these models is that the dependent variable comes before your list of independent variables, `y ~ x`. Often the syntax will ask for a formula before you enter  the argument for data.  
+Instead of ggplot's aesthetics function  `aes(x = temp, y = rate)`,  we can represent our variables as a formula `rate ~ temp`, which states that the linear formula will try to predict chirp rate (the y-value) based on a linear relationship with temperature (the x-value). Typically, these models assume that the dependent variable comes before your list of independent variables, `y ~ x`. Often, the syntax will ask for a formula before you enter  the argument for data.  
 
-Store the output of the `lm()` function as a new object `temp_lm`. And then call up the `summary.lm()` for a complete output of the linear model.
+Store the output of the `lm()` function as a new object `temp_lm`. Then, call up the `summary.lm()` for a complete linear model output.
 
 Update the chunk so it looks like the one below.
 
@@ -164,21 +165,21 @@ summary.lm(temp_lm)
 ```
 ````
 
-Notice that you get two values important from the linear model. The first is the intercept, the point at which the line of best fit would intersect the y-axis. Additionally we see a second value that represents the slope of the curve or the rate of the relationship. In this case we can see that as temperature raises 1 degree C, the crickets will chirp an additional 4 chirps per minute. 
+Notice that the linear model provides two important values. The first is the intercept, the point at which the line of best fit intersects the y-axis. Additionally, we see a second value that represents the slope of the curve or the rate of the relationship. In this case, we can see that as the temperature raises 1 degree C, the crickets will chirp an additional 4 chirps per minute. 
 
-In addition to the linear model giving us a sense of the relationship, we can also see the residual values (the distance between each point and the curve), the standard error of the measures, and even calculated probability values (p-values) for hypothesis testing. In fact this summary gives us great information if we are interested in t-values, R squared values, or F-statistics!
+In addition to the linear model, which gives us a sense of the relationship, we can also see the residual values (the distance between each point and the curve), the standard error of the measures, and even calculated probability values (p-values) for hypothesis testing. This summary gives us great information if we are interested in t-values, R-squared values, or F-statistics!
 
-For now, let's revise our earlier sentence in the text to add more information such as the following text:  
+For now, let's revise our earlier sentence in the text to add more information, such as the following text:  
 
 `Based on a scatter plot of temperature and chirping and a correlation test, it seems that as temperature increases one degree, the rate of chirping increases about 4.2 chirps per minute.`
 
 Save the file, knit, write a commit message, and ***commit***.
 
-Again, if you get an error related to the duplicate label 'temp', it is because the summary chunk should be only one chunk that w we wrote the above code in.
+Again, if you get an error related to the duplicate label 'temp', it is because the summary chunk should be the only chunk that we wrote the above code in.
 
-#### Temperture across species
+#### Temperature across species
 
-Next we can see if an account of the different species of crickets have an effect on our model. Up to this point, we have grouped all crickets together and that may be an inappropriate assumption. Many animals use signals like chirping to communicate and, for mating behaviors, it's important to distinguish your call from other similar species. Now lets make a new header and chunk for graphing and separating these two values. 
+Next, we can see if an account of the different species of crickets affects our model. Up to this point, we have grouped all crickets together, and that may be an inappropriate assumption. Many animals use signals like chirping to communicate, and for mating behaviors, it's important to distinguish your call from other similar species. Now, let's make a new header and chunk for graphing and separating these two values. 
 
 `## Species-specific effects of temperature on chirping`
 
@@ -193,7 +194,7 @@ ggplot(crickets, aes(x = temp, y = rate, color = species)) +
 ```
 ````
 
-Wow! It looks like instead of one line of best fit, now we have two! The plot has added colors to separate the data by species. Now we can clearly see that both crickets have a positive relationship between temperature and chirping, but start at different places. So let's return to our linear model to see how values have changed. Add the `lm()` and `summary.lm()` functions to the chunk. This time we will extend our formula to account for the new variable. 
+Wow! It looks like instead of one line of best fit, now we have two! The plot has added colors to separate the data by species. We can see that both crickets have a positive relationship between temperature and chirping but start at different places. So, let's return to our linear model to see how values have changed. Add the `lm()` and `summary.lm()` functions to the chunk. We will extend our formula to account for the new variable this time. 
 
 ````
 ```{r species, echo= FALSE}
@@ -211,21 +212,21 @@ summary.lm(species_lm)
 ```
 ````
 
-Let's check out the data of this model to see how it stacks up against the first model. Now we have three important values in the coefficients table. It helps us to think about the impact of the different variables on the line. The intercept again states where the line would cross the y-axis. The value gives us the temperature relationship to chirping like before. Notice that this has dropped to 3.6 as the slope so as temperature rises one degree (C) then the chirps increase 3.6 chirps per minute. Finally there is a third variable showing up as -10. This value represents the difference between species. Since we have only two species, we can treat this as the difference in the intercept between the two values. So the cricket species *O. exclamationis* has a chirp rate that is 10 chirps per minute higher than its counter part *O. niveus*. So we have a linear model that predicts the relationship between temperature, species and chirps. 
+Let's check out the data of this model to see how it stacks up against the first model. Now, we have three important values in the coefficients table. It helps us think about the impact of different variables on the line. The intercept again states where the line would cross the y-axis. The value gives us the temperature relationship to chirping like before. Notice that this has dropped to 3.6 as the slope, so as the temperature rises one degree (C), the chirps increase by 3.6 per minute. Finally, the third variable is -10. This value represents the difference between species. Since we have only two species, we can treat this as the difference in the intercept between the two values. So the cricket species *O. exclamationis* has a chirp rate of 10 chirps per minute, higher than its counterpart *O. niveus*. So, we have a linear model that predicts the relationship between temperature, species, and chirps. 
 
-We can use any of the statistical methods collected from summary.lm() to compare the quality of the species-specific model to the general model we made earlier. For instance, let's compare the R-squared values which is a measure of the amount of variance explained by the model. In the temp_lm model, the R-Squared value was 0.9199, which means about 92 percent of the variance in the data is explained by the model, whereas in the species_lm model, the R-Squared value was 0.9896, which means about 99 percent of the variance in the data is explained by this model. Even though the first model might be good enough, the second one is much more reliable for making predictions. 
+We can use any of the statistical methods collected from `summary.lm()` to compare the quality of the species-specific model to the general model we made earlier. For instance, let's compare the R-squared values, which measure the amount of variance explained by the model. In the `temp_lm` model, the R-squared value was 0.9199, which means about 92 percent of the variance in the data is explained by the model, whereas in the species_lm model, the R-squared value was 0.9896, which means about 99 percent of the variance in the data is explained by this model. Even though the first model might be good enough, the second one is much more reliable for making predictions. 
  
 Add text to explain in your own words what the second graph and model show. 
 
 Save the file, knit, write a commit message, and ***commit***.
 
-#### Interactions between temperture and species
+#### Interactions between temperature and species
 
-In addition to seeing the variables as contributing to the slope or intercept, we can also test for interactions. Perhaps we think that the effects of species and temperature might be interlinked because one species tends to live in a colder temperature than another species. 
+In addition to seeing the variables as contributing to the slope or intercept, we can also test for interactions. The effects of species and temperature might be interlinked because one species tends to live in a colder temperature than another. 
 
-For instance, let's examine the original histogram we made with a new sensitivity to the species variable. 
+For instance, let's examine our original histogram with a new sensitivity to the species variable. 
 
-Create a new header `## Interactions`, new chunk called `species histogram`, modify the code from the `summary` chunk to add fill as a variable for species. This new graph should show that the species occupy different temperature zones, which we may want to account for in the model. Add text below that states that these species occupy different temperature ranges.
+Create a new header `## Interactions`, new chunk called `species histogram` and then modify the code from the `summary` chunk to add fill as a variable for species. This latest graph should show that the species occupy different temperature zones, which we may want to account for in the model. Add text below that states that these species occupy different temperature ranges.
 
 ````
 ```{r species historgram, echo = FALSE}
@@ -236,7 +237,7 @@ ggplot(crickets, aes(x = rate, fill = species)) +
 ```
 ````
 
-This time we will use our code from the `species` chunk to make a new chunk `interactions`, but we will update it to include an addition to the formula so it accounts for interactions `rate ~ temp + species + temp:species`. Alternatively you could represent interactions with `rate ~ (temp + species)^2`. We will store the new model as an object `species_x_temp_lm`. To compare this with our previous model, we will add an additional code of an ANOVA (Analysis of Variance) to compare the two linear models. This comparison produces a p-value far above 0.05 and suggests that the interaction model and the species-species model are not statistically significant in their difference. Therefore we can rely on the simpler `species_lm` results. 
+This time we will use our code from the `species` chunk to make a new chunk `interactions`, but we will update it to include an addition to the formula so it accounts for interactions `rate ~ temp + species + temp:species`. Alternatively, you could represent interactions with `rate ~ (temp + species)^2`. We will store the new model as an object `species_x_temp_lm`. To compare this with our previous model, we will add an ANOVA (Analysis of Variance) code to compare the two linear models. This comparison produces a p-value far above 0.05 and suggests that the interaction and species-species models are not statistically significant in their difference. Therefore, we can rely on the simpler `species_lm` results. 
 
 ````
 ```{r interactions, echo= FALSE}
@@ -258,9 +259,11 @@ Add text that states that you checked for interactions but decided to stay with 
 
 Save the file, knit, write a commit message, and ***commit***.
 
-### Visualize and model diamonds prices
+### Visualize and model diamond prices
 
-Now try to build a linear model of at least 3 variables to predict the worth of a diamond without detailed instruction.
+Now, apply these skills to a different data set.
+
+Without detailed instruction, try to build a linear model of at least three variables to predict the worth of a diamond.
 
 You can find the data in the diamonds object:
 
@@ -270,9 +273,9 @@ Write commits, knit, and push all your work when you finish.
 
 ## Going deeper
 
-Congratulations! You wrote your first code for performing a linear regression analysis on data. These methods can be easily adapted for modeling nearly any data set. The basic ideas and formulas used here can be adopted to run logistic regression models, multiple linear models, hierarchical models, and many other approaches.
+Congratulations! You wrote your first code to perform a linear regression analysis on data. These methods can be easily adapted for modeling nearly any data set. The basic ideas and formulas used here can be adapted to run logistic regression models, multiple linear models, hierarchical models, and many other approaches.
 
-Consider additional resources to deepen your knowledge for your particular area of interest. 
+Consider additional resources to deepen your knowledge of your particular area of interest. 
 
 * [*Tidy Modeling with R*](https://www.tmwr.org/software-modeling.html) by Max Kuhn and Julia Silge.
 * [*R for Data Science*](https://r4ds.had.co.nz) by Hadley and Grolemund:
