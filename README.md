@@ -165,7 +165,7 @@ summary.lm(temp_lm)
 ```
 ````
 
-Notice that the linear model provides two important values. The first is the intercept, the point at which the line of best fit intersects the y-axis. Additionally, we see a second value that represents the slope of the curve or the rate of the relationship. In this case, we can see that as the temperature raises 1 degree C, the crickets will chirp an additional 4 chirps per minute. 
+Notice that the linear model provides two important values. The first is the intercept, the point at which the line of best fit intersects the y-axis. Additionally, we see a second value representing the curve's slope—--the relationship to rate. In this case, we can see that as the temperature rises 1 degree C, the crickets will chirp an additional four chirps per minute. 
 
 In addition to the linear model, which gives us a sense of the relationship, we can also see the residual values (the distance between each point and the curve), the standard error of the measures, and even calculated probability values (p-values) for hypothesis testing. This summary gives us great information if we are interested in t-values, R-squared values, or F-statistics!
 
@@ -175,11 +175,13 @@ For now, let's revise our earlier sentence in the text to add more information, 
 
 Save the file, knit, write a commit message, and ***commit***.
 
-Again, if you get an error related to the duplicate label 'temp', it is because the summary chunk should be the only chunk that we wrote the above code in.
+Again, if you get an error related to the duplicate label 'temp', it is because the summary chunk should be the only chunk in which we wrote the above code.
 
 #### Temperature across species
 
-Next, we can see if an account of the different species of crickets affects our model. Up to this point, we have grouped all crickets together, and that may be an inappropriate assumption. Many animals use signals like chirping to communicate, and for mating behaviors, it's important to distinguish your call from other similar species. Now, let's make a new header and chunk for graphing and separating these two values. 
+Next, we can see if an account of the different species of crickets affects our model. Up to this point, we have grouped all crickets, which may be an inappropriate assumption if the species are distinct. Many animals use signals like chirping to communicate, and it's important to distinguish your call from other similar species for mating behaviors. For instance, species of fireflies are known to signal at different times of night with unique light patterns and colors even when occupying similar areas.
+
+Now, let's make a new header and chunk for graphing and separating these two values. 
 
 `## Species-specific effects of temperature on chirping`
 
@@ -214,7 +216,7 @@ summary.lm(species_lm)
 
 Let's check out the data of this model to see how it stacks up against the first model. Now, we have three important values in the coefficients table. It helps us think about the impact of different variables on the line. The intercept again states where the line would cross the y-axis. The value gives us the temperature relationship to chirping like before. Notice that this has dropped to 3.6 as the slope, so as the temperature rises one degree (C), the chirps increase by 3.6 per minute. Finally, the third variable is -10. This value represents the difference between species. Since we have only two species, we can treat this as the difference in the intercept between the two values. So the cricket species *O. exclamationis* has a chirp rate of 10 chirps per minute, higher than its counterpart *O. niveus*. So, we have a linear model that predicts the relationship between temperature, species, and chirps. 
 
-We can use any of the statistical methods collected from `summary.lm()` to compare the quality of the species-specific model to the general model we made earlier. For instance, let's compare the R-squared values, which measure the amount of variance explained by the model. In the `temp_lm` model, the R-squared value was 0.9199, which means about 92 percent of the variance in the data is explained by the model, whereas in the species_lm model, the R-squared value was 0.9896, which means about 99 percent of the variance in the data is explained by this model. Even though the first model might be good enough, the second one is much more reliable for making predictions. 
+We can use any of the statistical methods collected from `summary.lm()` to compare the quality of the species-specific model to the general model we made earlier. For instance, let's compare the R-squared values, which measure the amount of variance the model explains. In the `temp_lm` model, the R-squared value was 0.9199, which means that the model accounts for about 92 percent of the variance in the data. In contrast, in the `species_lm` model, the R-squared value was 0.9896, which means about 99 percent of the variance in the data is explained by this model. Even though the first model might be good enough, the second one is much more reliable for making predictions. 
  
 Add text to explain in your own words what the second graph and model show. 
 
@@ -237,7 +239,7 @@ ggplot(crickets, aes(x = rate, fill = species)) +
 ```
 ````
 
-This time we will use our code from the `species` chunk to make a new chunk `interactions`, but we will update it to include an addition to the formula so it accounts for interactions `rate ~ temp + species + temp:species`. Alternatively, you could represent interactions with `rate ~ (temp + species)^2`. We will store the new model as an object `species_x_temp_lm`. To compare this with our previous model, we will add an ANOVA (Analysis of Variance) code to compare the two linear models. This comparison produces a p-value far above 0.05 and suggests that the interaction and species-species models are not statistically significant in their difference. Therefore, we can rely on the simpler `species_lm` results. 
+This time we will use our code from the `species` chunk to make a new chunk `interactions`, but we will update it to include an addition to the formula so it accounts for interactions `rate ~ temp + species + temp:species`. Alternatively, you could represent interactions with `rate ~ (temp + species)^2`. We will store the new model as an object `species_x_temp_lm`. To compare this with our previous species-specific models, we will add an ANOVA (Analysis of Variance) code to compare the two linear models. 
 
 ````
 ```{r interactions, echo= FALSE}
@@ -255,6 +257,7 @@ anova(species_lm, species_x_temp_lm)
 ```
 ````
 
+This comparison produces a p-value far above 0.05 and suggests that the species-temperature interaction and species-species models are not statistically significant in their difference. Therefore, we can rely on the simpler `species_lm` results. Adding more variables and interactions can often improve the  performance of R-squared, but then it becomes less meaningful to make predictions and practical decisions.
 Add text that states that you checked for interactions but decided to stay with the species model. 
 
 Save the file, knit, write a commit message, and ***commit***.
