@@ -272,7 +272,7 @@ You can find the data in the diamonds object:
 
 ```load(ggplot2::diamonds)```
 
-Write commits, knit, and push all your work when you finish.
+Write commits, knit, and push all your work (R Markdown file and the knitted html file) to your repo when you finish.
 
 ## Going deeper
 
